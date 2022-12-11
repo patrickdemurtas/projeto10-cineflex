@@ -5,9 +5,20 @@ import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
 
-export default function TelaFilmes({filmesURL}) {
+export default function TelaFilmes() {
 
- 
+    const [filmesURL, setFilmesURL] = useState([])
+   
+
+    console.log(filmesURL)
+
+
+    useEffect(() => {
+        const promise = axios.get('https://mock-api.driven.com.br/api/v8/cineflex/movies');
+        promise.then((res) => setFilmesURL(res.data));
+        promise.catch((erro) => console.log(erro.response.data));
+  
+    }, [])
    
 
 
@@ -22,10 +33,11 @@ export default function TelaFilmes({filmesURL}) {
             <CarregandoFilmes filmesURL={filmesURL} />
 
                 {filmesURL.map((f) => (
-                    
+                    <Link to={`/sessoes/${f.id}/${f.title}`}>
                     <CardFilme >
                         <img  src={f.posterURL} />
                     </CardFilme>
+                    </Link>
                    
                     ))}
                     

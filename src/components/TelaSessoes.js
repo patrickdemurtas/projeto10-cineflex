@@ -1,15 +1,16 @@
 import styled from "styled-components"
 
 
-export default function TelaAssentos(){
+export default function TelaSessoes() {
     return (
-        <TituloAssentos>
-            <p>Selecione o(s) assento(s)</p>
-        </TituloAssentos>
+        <TituloSessoes>
+            <p>Selecione o horário</p>
+        </TituloSessoes>
     )
 }
 
-const TituloAssentos = styled.div`
+
+const TituloSessoes = styled.div`
 width: 375px;
 height: 110px;
 margin: 0 auto;

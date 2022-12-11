@@ -1,21 +1,51 @@
 import styled from 'styled-components';
 import TelaFilmes from './TelaFilmes';
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import TelaAssentos from './TelaAssentos';
+import TelaSessoes from './TelaSessoes';
+import axios from 'axios';
+import { useState } from 'react'; 
+import { useEffect } from 'react';
 
 
 function App() {
+
+
+  const [filmesURL, setFilmesURL] = useState([])
+
+
+  console.log(filmesURL)
+
+
+  useEffect(() => {
+      const promise = axios.get('https://mock-api.driven.com.br/api/v8/cineflex/movies');
+      promise.then((res) => setFilmesURL(res.data));
+      promise.catch((erro) => console.log(erro.response.data));
+
+  }, [])
+
+
+
+
+
   return (
     <>
-      
+
 
       <LogoCineFlex >
-      <h1>CINEFLEX</h1>
-    </ LogoCineFlex>
+        <h1>CINEFLEX</h1>
+      </ LogoCineFlex>
 
-    <TelaFilmes />
- 
+      <BrowserRouter>
+        <Routes>
 
- </>
+         <Route path="/" element={<TelaFilmes filmesURL={filmesURL}/>} />
+        
+
+        </Routes>
+
+      </BrowserRouter>
+    </>
 
 
   );

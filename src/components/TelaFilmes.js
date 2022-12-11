@@ -2,22 +2,13 @@ import styled from "styled-components"
 import axios from "axios"
 import React from "react"
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 
 
-export default function TelaFilmes() {
+export default function TelaFilmes({filmesURL}) {
 
-    const [filmesURL, setFilmesURL] = useState([])
-
-
-    useEffect(() => {
-        const promise = axios.get('https://mock-api.driven.com.br/api/v8/cineflex/movies');
-        promise.then((res) => setFilmesURL(res.data));
-        promise.catch((erro) => console.log(erro.response.data));
-
-    }, [])
-
-    console.log(filmesURL)
-
+ 
+   
 
 
     return (
@@ -31,10 +22,13 @@ export default function TelaFilmes() {
             <CarregandoFilmes filmesURL={filmesURL} />
 
                 {filmesURL.map((f) => (
-                    <CardFilme>
-                        <img src={f.posterURL} />
-                    </CardFilme>))}
-
+                    
+                    <CardFilme >
+                        <img  src={f.posterURL} />
+                    </CardFilme>
+                   
+                    ))}
+                    
 
             </TelaConteudo>
         </>
@@ -74,7 +68,8 @@ flex-wrap: wrap;
 justify-content: space-around;
 `
 
-const CardFilme = styled.div`
+const CardFilme = styled.button`
+margin-top: 5px;
 height: 209px;
 width: 145px;
 padding: 8px;

@@ -6,7 +6,7 @@ import { useEffect, useState } from "react"
 
 export default function TelaFilmes() {
 
-    const [filmesURL, setFilmesURL] = useState(undefined)
+    const [filmesURL, setFilmesURL] = useState([])
 
 
     useEffect(() => {
@@ -25,16 +25,29 @@ export default function TelaFilmes() {
             <TelaTitulo>
                 <p>Selecione o filme</p>
             </TelaTitulo>
+           
 
             <TelaConteudo>
+            <CarregandoFilmes filmesURL={filmesURL} />
 
-           
-                
+                {filmesURL.map((f) => (
+                    <CardFilme>
+                        <img src={f.posterURL} />
+                    </CardFilme>))}
+
+
             </TelaConteudo>
         </>
     )
 }
 
+function CarregandoFilmes({filmesURL}){
+    if(filmesURL.length === 0){
+        return (
+            <div>Carregando lista de filmes...</div>
+        )
+    }
+}
 
 
 const TelaTitulo = styled.div`
@@ -59,7 +72,6 @@ background-color: white;
 display: flex;
 flex-wrap: wrap;
 justify-content: space-around;
-
 `
 
 const CardFilme = styled.div`
@@ -72,6 +84,5 @@ box-shadow: 0 2px 4px 2px #0000001A;
 img{
     width: 129px;
     height: 193px;
-
 }
 `

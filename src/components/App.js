@@ -1,8 +1,7 @@
 import styled from 'styled-components';
-import GlobalStyle from '../styles/GlobalStyle';
 import TelaFilmes from './TelaFilmes';
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import axios from 'axios';
+
 
 function App() {
   return (
@@ -46,3 +45,6 @@ h1{
 
 }
 `
+
+
+

@@ -76,7 +76,7 @@ export default function TelaSessoes() {
 function CarregandoSessoes({ sessoes }) {
     if (sessoes.length === 0) {
         return (
-            <div>Carregando sessões</div>
+            <div>Carregando sessões...</div>
         )
     } else {
         return (

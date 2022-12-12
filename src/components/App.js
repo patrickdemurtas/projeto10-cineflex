@@ -26,7 +26,7 @@ function App() {
         <Routes>
 
           <Route path="/" element={<TelaFilmes />} />
-          <Route path='/sessoes/:idFilme/:nomeFilme' element={<TelaSessoes />} />
+          <Route path='/sessoes/:idFilme' element={<TelaSessoes />} />
           <Route path='/assentos' element={<TelaAssentos />} />
           <Route path='/sucesso' element={<TelaSucesso />} />
 

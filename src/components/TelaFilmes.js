@@ -33,7 +33,7 @@ export default function TelaFilmes() {
             <CarregandoFilmes filmesURL={filmesURL} />
 
                 {filmesURL.map((f) => (
-                    <Link to={`/sessoes/${f.id}/${f.title}`}>
+                    <Link to={`/sessoes/${f.id}`}>
                     <CardFilme >
                         <img  src={f.posterURL} />
                     </CardFilme>

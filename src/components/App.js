@@ -27,7 +27,7 @@ function App() {
 
           <Route path="/" element={<TelaFilmes />} />
           <Route path='/sessoes/:idFilme' element={<TelaSessoes />} />
-          <Route path='/assentos' element={<TelaAssentos />} />
+          <Route path='/assentos/:idSessao' element={<TelaAssentos />} />
           <Route path='/sucesso' element={<TelaSucesso />} />
 
         </Routes>

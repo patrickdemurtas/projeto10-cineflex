@@ -11,14 +11,21 @@ export default function TelaAssentos() {
     console.log(idSessao);
 
     const [assentos, setAssentos] = useState([])
+    const [disp, setDisp] = useState([])
 
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idSessao}/seats`)
         promise.then((res) => setAssentos(res.data))
+        
+
+        promise.then((res) => setDisp(res.data.seats))
         promise.catch((erro) => console.log(erro.response.data))
     }, [])
 
     console.log(assentos)
+
+    console.log(disp)
+    
 
 
 
@@ -61,6 +68,12 @@ export default function TelaAssentos() {
     )
 }
 
+
+function funClicar(){
+    alert('oi')
+}
+
+
 function CarregandoAssentos({ assentos }) {
     if (assentos.length === 0) {
         return (
@@ -74,7 +87,7 @@ function CarregandoAssentos({ assentos }) {
             assentos.seats.map((as) => (
                 <>
 
-                    <AssentosDispOuNao>
+                    <AssentosDispOuNao cor={as.isAvailable} onClick={funClicar}>
                         <p>{as.name}</p>
                     </AssentosDispOuNao>
 
@@ -87,6 +100,8 @@ function CarregandoAssentos({ assentos }) {
 
     }
 }
+
+
 
 function CarregandoRodape({ assentos }) {
     if (assentos.length === 0) {
@@ -133,7 +148,7 @@ justify-content: center;
 width: 26px;
 height: 26px;
 border-radius: 12px;
-background-color: #C3CFD9;
+background-color: ${props => props.cor ? "#C3CFD9" : "#FBE192"};
 margin-right: 10px;
 margin-bottom: 18px;
 p{

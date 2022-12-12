@@ -69,8 +69,11 @@ export default function TelaAssentos() {
 }
 
 
-function funClicar(){
-    alert('oi')
+function funClicar(disponivel){
+    if(disponivel === false){
+        alert('Esse assento não está disponível')
+    }
+    
 }
 
 
@@ -87,7 +90,7 @@ function CarregandoAssentos({ assentos }) {
             assentos.seats.map((as) => (
                 <>
 
-                    <AssentosDispOuNao cor={as.isAvailable} onClick={funClicar}>
+                    <AssentosDispOuNao cor={as.isAvailable} onClick={() => funClicar(as.isAvailable)}>
                         <p>{as.name}</p>
                     </AssentosDispOuNao>
 

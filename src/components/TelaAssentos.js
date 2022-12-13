@@ -11,21 +11,19 @@ export default function TelaAssentos() {
     console.log(idSessao);
 
     const [assentos, setAssentos] = useState([])
-    const [disp, setDisp] = useState([])
+    
+    
 
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idSessao}/seats`)
         promise.then((res) => setAssentos(res.data))
-        
-
-        promise.then((res) => setDisp(res.data.seats))
         promise.catch((erro) => console.log(erro.response.data))
     }, [])
 
     console.log(assentos)
 
-    console.log(disp)
-    
+    console.log(assentos.seats)
+
 
 
 
@@ -44,6 +42,8 @@ export default function TelaAssentos() {
             <TituloAssentos>
                 <p>Selecione o(s) assento(s)</p>
             </TituloAssentos>
+
+
 
             <ConteudoAssentos>
                 <CarregandoAssentos assentos={assentos} />
@@ -69,15 +69,9 @@ export default function TelaAssentos() {
 }
 
 
-function funClicar(disponivel){
-    if(disponivel === false){
-        alert('Esse assento não está disponível')
-    }
-    
-}
-
 
 function CarregandoAssentos({ assentos }) {
+
     if (assentos.length === 0) {
         return (
             <ConteudoAssentos>
@@ -90,7 +84,7 @@ function CarregandoAssentos({ assentos }) {
             assentos.seats.map((as) => (
                 <>
 
-                    <AssentosDispOuNao cor={as.isAvailable} onClick={() => funClicar(as.isAvailable)}>
+                    <AssentosDispOuNao cor={as.isAvailable} onClick={() => funClicar(as)}>
                         <p>{as.name}</p>
                     </AssentosDispOuNao>
 
@@ -103,6 +97,20 @@ function CarregandoAssentos({ assentos }) {
 
     }
 }
+
+
+
+
+function funClicar(as) {
+    if (as.isAvailable === false) {
+        alert('Esse assento não está disponível')
+    } else if (as.isAvailable === true){
+        return true
+    }
+
+}
+
+
 
 
 
@@ -151,7 +159,13 @@ justify-content: center;
 width: 26px;
 height: 26px;
 border-radius: 12px;
-background-color: ${props => props.cor ? "#C3CFD9" : "#FBE192"};
+background-color: ${props => {
+        if (props.cor === true) {
+            return "#C3CFD9"
+        } else if (props.cor === false) {
+            return "#FBE192"
+        } 
+    }};
 margin-right: 10px;
 margin-bottom: 18px;
 p{
@@ -220,4 +234,22 @@ p{
     color: #4E5A65;
     margin-top: 50px;
 }
+`
+
+const AssentosSelec = styled.div`
+display: flex;
+align-items: center;
+justify-content: center;
+width: 26px;
+height: 26px;
+border-radius: 12px;
+background-color: #1AAE9E;
+margin-right: 10px;
+margin-bottom: 18px;
+p{
+    font-family: Roboto;
+    font-weight: 400;
+    font-size: 11px;
+}
+
 `
